@@ -1,0 +1,15 @@
+D:\Education\RouteASP Tasks\E_Commerce\E_Commerce.Application\bin\Debug\net8.0\E_Commerce.Application.deps.json
+D:\Education\RouteASP Tasks\E_Commerce\E_Commerce.Application\bin\Debug\net8.0\E_Commerce.Application.dll
+D:\Education\RouteASP Tasks\E_Commerce\E_Commerce.Application\bin\Debug\net8.0\E_Commerce.Application.pdb
+D:\Education\RouteASP Tasks\E_Commerce\E_Commerce.Application\bin\Debug\net8.0\E_Commerce.Domain.dll
+D:\Education\RouteASP Tasks\E_Commerce\E_Commerce.Application\bin\Debug\net8.0\E_Commerce.Domain.pdb
+D:\Education\RouteASP Tasks\E_Commerce\E_Commerce.Application\obj\Debug\net8.0\E_Commerce.Application.csproj.AssemblyReference.cache
+D:\Education\RouteASP Tasks\E_Commerce\E_Commerce.Application\obj\Debug\net8.0\E_Commerce.Application.GeneratedMSBuildEditorConfig.editorconfig
+D:\Education\RouteASP Tasks\E_Commerce\E_Commerce.Application\obj\Debug\net8.0\E_Commerce.Application.AssemblyInfoInputs.cache
+D:\Education\RouteASP Tasks\E_Commerce\E_Commerce.Application\obj\Debug\net8.0\E_Commerce.Application.AssemblyInfo.cs
+D:\Education\RouteASP Tasks\E_Commerce\E_Commerce.Application\obj\Debug\net8.0\E_Commerce.Application.csproj.CoreCompileInputs.cache
+D:\Education\RouteASP Tasks\E_Commerce\E_Commerce.Application\obj\Debug\net8.0\E_Commer.4B0C5673.Up2Date
+D:\Education\RouteASP Tasks\E_Commerce\E_Commerce.Application\obj\Debug\net8.0\E_Commerce.Application.dll
+D:\Education\RouteASP Tasks\E_Commerce\E_Commerce.Application\obj\Debug\net8.0\refint\E_Commerce.Application.dll
+D:\Education\RouteASP Tasks\E_Commerce\E_Commerce.Application\obj\Debug\net8.0\E_Commerce.Application.pdb
+D:\Education\RouteASP Tasks\E_Commerce\E_Commerce.Application\obj\Debug\net8.0\ref\E_Commerce.Application.dll
