@@ -4,11 +4,13 @@ using E_Commerce.Application.Common;
 using E_Commerce.Application.DTOs.Products;
 using E_Commerce.Application.Profilers;
 using E_Commerce.Application.Services.Contracts;
+using E_Commerce.Application.Specification;
 using E_Commerce.Domain.Contracts;
 using E_Commerce.Domain.Data.Products;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -25,9 +27,10 @@ namespace E_Commerce.Application.Services.Implemetion
            
         }
 
-        public async Task<Results<IReadOnlyList<ProductDTO>>> GetAllProductsAsync(CancellationToken ct = default)
+        public async Task<Results<IReadOnlyList<ProductDTO>>> GetAllProductsAsync(QueryParams queryParams ,CancellationToken ct = default)
         {
-            var products = await unitofwork.GetRepositries<Product, int>().GetAll(ct);
+            var productspec = new ProductSpecification(queryParams); 
+            var products = await unitofwork.GetRepositries<Product, int>().GetAll(productspec, ct);
             var productdtos =  _mapping.Map<IReadOnlyList<ProductDTO>>(products);
 
             return Results<IReadOnlyList<ProductDTO>>.OK(productdtos); 
@@ -43,8 +46,10 @@ namespace E_Commerce.Application.Services.Implemetion
         }
 
         public async Task<Results<ProductDTO?>> GetByIdAsync(int id, CancellationToken ct)
+
         {
-            var product = await unitofwork.GetRepositries<Product , int>().GetById(id, ct);
+            var  productSpecfication =  new ProductSpecification(id);
+            var product = await unitofwork.GetRepositries<Product , int>().GetById(productSpecfication ,ct);
 
             if (product == null)
                 return Results<ProductDTO>.Fail(Errors.NotFound("Product.NotFound"));

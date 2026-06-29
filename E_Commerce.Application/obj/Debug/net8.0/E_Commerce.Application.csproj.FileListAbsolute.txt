@@ -13,3 +13,4 @@ D:\Education\RouteASP Tasks\E_Commerce\E_Commerce.Application\obj\Debug\net8.0\E
 D:\Education\RouteASP Tasks\E_Commerce\E_Commerce.Application\obj\Debug\net8.0\refint\E_Commerce.Application.dll
 D:\Education\RouteASP Tasks\E_Commerce\E_Commerce.Application\obj\Debug\net8.0\E_Commerce.Application.pdb
 D:\Education\RouteASP Tasks\E_Commerce\E_Commerce.Application\obj\Debug\net8.0\ref\E_Commerce.Application.dll
+D:\Education\RouteASP Tasks\E_Commerce\E_Commerce.Application\obj\Debug\net8.0\E_Commerce.Application.sourcelink.json
