@@ -152,3 +152,4 @@ D:\Education\RouteASP Tasks\E_Commerce\E_Commerce.API\obj\Debug\net8.0\E_Commerc
 D:\Education\RouteASP Tasks\E_Commerce\E_Commerce.API\obj\Debug\net8.0\E_Commerce.API.genruntimeconfig.cache
 D:\Education\RouteASP Tasks\E_Commerce\E_Commerce.API\obj\Debug\net8.0\ref\E_Commerce.API.dll
 D:\Education\RouteASP Tasks\E_Commerce\E_Commerce.API\bin\Debug\net8.0\AutoMapper.dll
+D:\Education\RouteASP Tasks\E_Commerce\E_Commerce.API\obj\Debug\net8.0\E_Commerce.API.sourcelink.json
