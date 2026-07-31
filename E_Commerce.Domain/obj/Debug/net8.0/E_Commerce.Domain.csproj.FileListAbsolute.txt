@@ -10,3 +10,4 @@ D:\Education\RouteASP Tasks\E_Commerce\E_Commerce.Domain\obj\Debug\net8.0\refint
 D:\Education\RouteASP Tasks\E_Commerce\E_Commerce.Domain\obj\Debug\net8.0\E_Commerce.Domain.pdb
 D:\Education\RouteASP Tasks\E_Commerce\E_Commerce.Domain\obj\Debug\net8.0\ref\E_Commerce.Domain.dll
 D:\Education\RouteASP Tasks\E_Commerce\E_Commerce.Domain\obj\Debug\net8.0\E_Commerce.Domain.sourcelink.json
+D:\Education\RouteASP Tasks\E_Commerce\E_Commerce.Domain\obj\Debug\net8.0\E_Commerce.Domain.csproj.AssemblyReference.cache

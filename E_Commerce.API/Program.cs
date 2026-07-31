@@ -1,4 +1,4 @@
-using E_Commerce.API.Extenios;
+using E_Commerce.API.Extensions;
 using E_Commerce.Application;
 using E_Commerce.Application.Profilers;
 using E_Commerce.Infrastructure;
@@ -16,6 +16,7 @@ namespace E_Commerce.API
 
             builder.Services.AddControllers();
             builder.Services.AddInfrastructureServices(builder.Configuration); //  this  line  DI  comming  from  Infrastructure layer . 
+            builder.Services.AddIdentityServices(builder.Configuration);
             builder.Services.AddServicesApplication();   //  this line   amke DI  comming  from  Application layer .  
             builder.Services.Configure<UrlSetteings>(builder.Configuration.GetSection("UrlSettings")); //  
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -40,6 +41,7 @@ namespace E_Commerce.API
 
             app.UseHttpsRedirection();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
 
