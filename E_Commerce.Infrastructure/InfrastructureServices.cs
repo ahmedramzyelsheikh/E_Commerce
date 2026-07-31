@@ -37,6 +37,7 @@ namespace E_Commerce.Infrastructure
             services.AddKeyedScoped<IDataSeeder, DataSeeder>("Catalog");
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IBasketRepository, BasketRepository>();
+            services.AddScoped<IOrderService, Services.OrderService>();
 
             services.AddSingleton<StackExchange.Redis.IConnectionMultiplexer>(sp =>
             {
