@@ -38,6 +38,7 @@ namespace E_Commerce.Infrastructure
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IBasketRepository, BasketRepository>();
             services.AddScoped<IOrderService, Services.OrderService>();
+            services.AddScoped<IPaymentService, Services.PaymentService>();
 
             services.AddSingleton<StackExchange.Redis.IConnectionMultiplexer>(sp =>
             {
