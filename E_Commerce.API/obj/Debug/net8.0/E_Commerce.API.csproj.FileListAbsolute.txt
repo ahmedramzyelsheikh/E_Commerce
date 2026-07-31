@@ -144,7 +144,6 @@ D:\Education\RouteASP Tasks\E_Commerce\E_Commerce.API\obj\Debug\net8.0\staticweb
 D:\Education\RouteASP Tasks\E_Commerce\E_Commerce.API\obj\Debug\net8.0\staticwebassets.development.json
 D:\Education\RouteASP Tasks\E_Commerce\E_Commerce.API\obj\Debug\net8.0\staticwebassets.build.endpoints.json
 D:\Education\RouteASP Tasks\E_Commerce\E_Commerce.API\obj\Debug\net8.0\swae.build.ex.cache
-D:\Education\RouteASP Tasks\E_Commerce\E_Commerce.API\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt
 D:\Education\RouteASP Tasks\E_Commerce\E_Commerce.API\obj\Debug\net8.0\E_Commer.B710E5A6.Up2Date
 D:\Education\RouteASP Tasks\E_Commerce\E_Commerce.API\obj\Debug\net8.0\E_Commerce.API.dll
 D:\Education\RouteASP Tasks\E_Commerce\E_Commerce.API\obj\Debug\net8.0\refint\E_Commerce.API.dll
@@ -153,3 +152,8 @@ D:\Education\RouteASP Tasks\E_Commerce\E_Commerce.API\obj\Debug\net8.0\E_Commerc
 D:\Education\RouteASP Tasks\E_Commerce\E_Commerce.API\obj\Debug\net8.0\ref\E_Commerce.API.dll
 D:\Education\RouteASP Tasks\E_Commerce\E_Commerce.API\bin\Debug\net8.0\AutoMapper.dll
 D:\Education\RouteASP Tasks\E_Commerce\E_Commerce.API\obj\Debug\net8.0\E_Commerce.API.sourcelink.json
+D:\Education\RouteASP Tasks\E_Commerce\E_Commerce.API\bin\Debug\net8.0\RESPite.dll
+D:\Education\RouteASP Tasks\E_Commerce\E_Commerce.API\bin\Debug\net8.0\StackExchange.Redis.dll
+D:\Education\RouteASP Tasks\E_Commerce\E_Commerce.API\bin\Debug\net8.0\System.Diagnostics.DiagnosticSource.dll
+D:\Education\RouteASP Tasks\E_Commerce\E_Commerce.API\bin\Debug\net8.0\System.IO.Hashing.dll
+D:\Education\RouteASP Tasks\E_Commerce\E_Commerce.API\bin\Debug\net8.0\System.IO.Pipelines.dll

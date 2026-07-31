@@ -1,4 +1,4 @@
-﻿using E_Commerce.Application.Profilers;
+using E_Commerce.Application.Profilers;
 using E_Commerce.Application.Services.Contracts;
 using E_Commerce.Application.Services.Implemetion;
 using Microsoft.Extensions.DependencyInjection;
@@ -16,6 +16,7 @@ namespace E_Commerce.Application
         {
             services.AddAutoMapper(c=> { }, typeof(ApplicationExtentionsServices).Assembly) ;
             services.AddScoped<IProductService, ProductServices>();  
+            services.AddScoped<IBasketService, BasketService>();
 
             return services; 
         }
