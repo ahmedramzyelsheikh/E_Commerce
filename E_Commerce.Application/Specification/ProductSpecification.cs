@@ -1,4 +1,4 @@
-﻿using E_Commerce.Application.Common;
+using E_Commerce.Application.Common;
 using E_Commerce.Domain.Data.Products;
 using System;
 using System.Collections.Generic;
@@ -17,6 +17,28 @@ namespace E_Commerce.Application.Specification
         {
             Adding(p => p.ProductBrand);
             Adding(p => p.ProductType);
+
+            if (!string.IsNullOrEmpty(queryParams.Sort))
+            {
+                switch (queryParams.Sort)
+                {
+                    case "priceAsc":
+                        AddOrderBy(p => p.Price);
+                        break;
+                    case "priceDesc":
+                        AddOrderByDescending(p => p.Price);
+                        break;
+                    default:
+                        AddOrderBy(n => n.Name);
+                        break;
+                }
+            }
+            else
+            {
+                AddOrderBy(n => n.Name);
+            }
+
+            ApplyPaging(queryParams.PageSize * (queryParams.PageIndex - 1), queryParams.PageSize);
         }
         public ProductSpecification(int id  ) :  base(p=> p.Id==id)
         {

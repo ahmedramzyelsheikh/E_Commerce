@@ -1,4 +1,4 @@
-﻿using E_Commerce.Domain.Contracts;
+using E_Commerce.Domain.Contracts;
 using E_Commerce.Infrastructure.DataSeeding;
 using E_Commerce.Infrastructure.Repositries;
 using Microsoft.EntityFrameworkCore;
@@ -23,6 +23,14 @@ namespace E_Commerce.Infrastructure
             //  services.AddScoped<IDataSeeder, DataSeeder>();  not this best  way  becasuse there is ways to seedign so  i will adding  key 
             services.AddKeyedScoped<IDataSeeder, DataSeeder>("Catalog");
             services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddScoped<IBasketRepository, BasketRepository>();
+
+            services.AddSingleton<StackExchange.Redis.IConnectionMultiplexer>(sp =>
+            {
+                var connection = configuration.GetConnectionString("Redis");
+                return StackExchange.Redis.ConnectionMultiplexer.Connect(connection!);
+            });
+
             return services;
         }
     }
