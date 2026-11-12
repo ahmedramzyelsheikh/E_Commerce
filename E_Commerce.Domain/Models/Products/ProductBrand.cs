@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace E_Commerce.Domain.Data.Products
+namespace E_Commerce.Domain.Models.Products
 {
     public class ProductBrand : BaseEntity<int>
     {

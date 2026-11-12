@@ -8,8 +8,8 @@ namespace E_Commerce.Application.DTOs.Products
 {
     public class ProductDTO
     {
+        public int Id { get; set; }
        // Id, Name, Description, PictureUrl, Price, ProductBrand, ProductType
-       int Id { get  ; set; }
         public string Name { get; set; }
         public string Description { get; set; }
 

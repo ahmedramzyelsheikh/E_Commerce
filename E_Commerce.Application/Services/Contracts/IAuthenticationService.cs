@@ -1,5 +1,5 @@
 using E_Commerce.Application.DTOs.Identity;
-using E_Commerce.API.Common;
+using E_Commerce.Application.Common;
 
 namespace E_Commerce.Application.Services.Contracts
 {

@@ -1,7 +1,8 @@
+using E_Commerce.Application.Services.Contracts;
 using E_Commerce.Domain.Contracts;
 using E_Commerce.Domain.Models.Basket;
 using E_Commerce.Domain.Models.OrderModule;
-using E_Commerce.Domain.Data.Products;
+using E_Commerce.Domain.Models.Products;
 using Microsoft.Extensions.Configuration;
 using Stripe;
 
@@ -31,7 +32,7 @@ namespace E_Commerce.Infrastructure.Services
 
             if (basket.DeliveryMethodId.HasValue)
             {
-                var deliveryMethodRepo = _unitOfWork.GetRepositries<DeliveryMethod, int>();
+                var deliveryMethodRepo = _unitOfWork.GetRepository<DeliveryMethod, int>();
                 var deliveryMethod = await deliveryMethodRepo.GetById(basket.DeliveryMethodId.Value, CancellationToken.None);
                 if (deliveryMethod != null)
                 {
@@ -39,7 +40,7 @@ namespace E_Commerce.Infrastructure.Services
                 }
             }
 
-            var productRepo = _unitOfWork.GetRepositries<E_Commerce.Domain.Data.Products.Product, int>();
+            var productRepo = _unitOfWork.GetRepository<E_Commerce.Domain.Models.Products.Product, int>();
 
             foreach (var item in basket.Items)
             {

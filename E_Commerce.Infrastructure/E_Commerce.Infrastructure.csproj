@@ -17,6 +17,11 @@
     <FrameworkReference Include="Microsoft.AspNetCore.App" />
   </ItemGroup>
 
+  <!-- Seed data: copied to <output>/DataSeed, where DataSeeder reads it -->
+  <ItemGroup>
+    <None Include="DataSeeding\SeedData\*.json" CopyToOutputDirectory="PreserveNewest" Link="DataSeed\%(Filename)%(Extension)" />
+  </ItemGroup>
+
   <ItemGroup>
     <ProjectReference Include="..\E_Commerce.Application\E_Commerce.Application.csproj" />
     <ProjectReference Include="..\E_Commerce.Domain\E_Commerce.Domain.csproj" />

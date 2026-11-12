@@ -11,6 +11,6 @@ namespace E_Commerce.Domain.Contracts
     {
         Task<int> SaveChangeAsynce(CancellationToken ct);
 
-        IGenericRepository<TEnitiy, Tkey> GetRepositries<TEnitiy, Tkey>() where TEnitiy : BaseEntity<Tkey>;
+        IGenericRepository<TEnitiy, Tkey> GetRepository<TEnitiy, Tkey>() where TEnitiy : BaseEntity<Tkey>;
     }
 }

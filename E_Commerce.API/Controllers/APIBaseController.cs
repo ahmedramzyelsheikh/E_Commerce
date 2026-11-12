@@ -1,5 +1,4 @@
-﻿using E_Commerce.API.Common;
-using E_Commerce.Application.Common;
+﻿using E_Commerce.Application.Common;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -18,7 +17,7 @@ namespace E_Commerce.API.Controllers
                 return TOProblem(result.Error);
         
         }
-        public static ActionResult ToActionResult(Common.Results result)
+        public static ActionResult ToActionResult(E_Commerce.Application.Common.Results result)
         {
 
             if (result.IsSuccessed) return new OkObjectResult(result);

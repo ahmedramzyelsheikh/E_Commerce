@@ -1,6 +1,6 @@
 using E_Commerce.Application.DTOs.Basket;
 
-using E_Commerce.API.Common;
+using E_Commerce.Application.Common;
 
 namespace E_Commerce.Application.Services.Contracts
 {

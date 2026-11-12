@@ -1,7 +1,8 @@
+using E_Commerce.Application.Services.Contracts;
 using E_Commerce.Domain.Contracts;
 using Microsoft.AspNetCore.Identity;
 using E_Commerce.Infrastructure.DataSeeding;
-using E_Commerce.Infrastructure.Repositries;
+using E_Commerce.Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;

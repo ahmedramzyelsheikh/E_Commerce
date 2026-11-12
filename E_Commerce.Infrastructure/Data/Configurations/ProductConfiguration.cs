@@ -1,4 +1,4 @@
-﻿using E_Commerce.Domain.Data.Products;
+﻿using E_Commerce.Domain.Models.Products;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace E_Commerce.Infrastructure.Data.Configurations
 {
-    public class ConfigurationProduct : IEntityTypeConfiguration<Product>
+    public class ProductConfiguration : IEntityTypeConfiguration<Product>
     {
         public void Configure(EntityTypeBuilder<Product> builder)
         {

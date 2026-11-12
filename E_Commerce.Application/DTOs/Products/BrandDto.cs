@@ -8,7 +8,7 @@ namespace E_Commerce.Application.DTOs.Products
 {
     public class BrandDto
     {
-        int Id { get; set; }
+        public int Id { get; set; }
         public string Name { get; set; }
     }
 }

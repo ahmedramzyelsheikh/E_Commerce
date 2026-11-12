@@ -1,5 +1,4 @@
-﻿using E_Commerce.API.Common;
-using E_Commerce.Application.Common;
+﻿using E_Commerce.Application.Common;
 using E_Commerce.Application.DTOs.Products;
 using E_Commerce.Application.Services.Contracts;
 using Microsoft.AspNetCore.Http;

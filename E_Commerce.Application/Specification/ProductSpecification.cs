@@ -1,5 +1,5 @@
 using E_Commerce.Application.Common;
-using E_Commerce.Domain.Data.Products;
+using E_Commerce.Domain.Models.Products;
 using System;
 using System.Collections.Generic;
 using System.Linq;

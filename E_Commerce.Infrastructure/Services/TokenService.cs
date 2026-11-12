@@ -19,7 +19,11 @@ namespace E_Commerce.Infrastructure.Services
         {
             _config = config;
             _userManager = userManager;
-            _key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Token:Key"]!));
+            var keyBytes = Encoding.UTF8.GetBytes(_config["Token:Key"] ?? string.Empty);
+            // HMAC-SHA512 needs a key of at least 512 bits (64 bytes).
+            if (keyBytes.Length < 64)
+                throw new InvalidOperationException("Token:Key must be at least 64 characters long for HMAC-SHA512.");
+            _key = new SymmetricSecurityKey(keyBytes);
         }
 
         public async Task<string> CreateTokenAsync(ApplicationUser user)

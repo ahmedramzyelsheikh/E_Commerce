@@ -8,6 +8,6 @@ namespace E_Commerce.Domain.Contracts
 {
     public interface IDataSeeder
     {
-        Task DataSeedingAync(CancellationToken ct = default);
+        Task DataSeedingAsync(CancellationToken ct = default);
     }
 }

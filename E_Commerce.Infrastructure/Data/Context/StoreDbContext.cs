@@ -1,4 +1,4 @@
-using E_Commerce.Domain.Data.Products;
+using E_Commerce.Domain.Models.Products;
 using E_Commerce.Domain.Models.OrderModule;
 using Microsoft.EntityFrameworkCore;
 using System;

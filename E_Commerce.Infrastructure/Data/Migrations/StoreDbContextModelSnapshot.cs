@@ -22,7 +22,7 @@ namespace E_Commerce.Infrastructure.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("E_Commerce.Domain.Data.Products.Product", b =>
+            modelBuilder.Entity("E_Commerce.Domain.Models.Products.Product", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -63,7 +63,7 @@ namespace E_Commerce.Infrastructure.Migrations
                     b.ToTable("Products");
                 });
 
-            modelBuilder.Entity("E_Commerce.Domain.Data.Products.ProductBrand", b =>
+            modelBuilder.Entity("E_Commerce.Domain.Models.Products.ProductBrand", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -80,7 +80,7 @@ namespace E_Commerce.Infrastructure.Migrations
                     b.ToTable("ProductBrands");
                 });
 
-            modelBuilder.Entity("E_Commerce.Domain.Data.Products.ProductType", b =>
+            modelBuilder.Entity("E_Commerce.Domain.Models.Products.ProductType", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -185,15 +185,15 @@ namespace E_Commerce.Infrastructure.Migrations
                     b.ToTable("OrderItems");
                 });
 
-            modelBuilder.Entity("E_Commerce.Domain.Data.Products.Product", b =>
+            modelBuilder.Entity("E_Commerce.Domain.Models.Products.Product", b =>
                 {
-                    b.HasOne("E_Commerce.Domain.Data.Products.ProductBrand", "ProductBrand")
+                    b.HasOne("E_Commerce.Domain.Models.Products.ProductBrand", "ProductBrand")
                         .WithMany("Products")
                         .HasForeignKey("BrandId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("E_Commerce.Domain.Data.Products.ProductType", "ProductType")
+                    b.HasOne("E_Commerce.Domain.Models.Products.ProductType", "ProductType")
                         .WithMany("Products")
                         .HasForeignKey("TypeId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -280,12 +280,12 @@ namespace E_Commerce.Infrastructure.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("E_Commerce.Domain.Data.Products.ProductBrand", b =>
+            modelBuilder.Entity("E_Commerce.Domain.Models.Products.ProductBrand", b =>
                 {
                     b.Navigation("Products");
                 });
 
-            modelBuilder.Entity("E_Commerce.Domain.Data.Products.ProductType", b =>
+            modelBuilder.Entity("E_Commerce.Domain.Models.Products.ProductType", b =>
                 {
                     b.Navigation("Products");
                 });

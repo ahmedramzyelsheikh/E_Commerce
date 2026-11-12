@@ -1,7 +1,7 @@
 ﻿using E_Commerce.Application.Common;
 using System.Diagnostics.Contracts;
 
-namespace E_Commerce.API.Common
+namespace E_Commerce.Application.Common
 {
     public class Results
     {
@@ -20,13 +20,13 @@ namespace E_Commerce.API.Common
         public static Results Fail(IReadOnlyList<Errors> error) => new Results(false, error);
 
     }
-    public class Results<TVaule> : Results
+    public class Results<TValue> : Results
     {
 
-        public TVaule Data => IsSuccessed ? _value : throw new InvalidOperationException("Cannot  assign data  because this  operations is failure");
-        private TVaule _value; 
+        public TValue Data => IsSuccessed ? _value : throw new InvalidOperationException("Cannot  assign data  because this  operations is failure");
+        private TValue _value; 
 
-        public Results(TVaule  value ) :  base(true  , Array.Empty<Errors>())
+        public Results(TValue  value ) :  base(true  , Array.Empty<Errors>())
         {
             _value = value;
         }
@@ -39,10 +39,10 @@ namespace E_Commerce.API.Common
             _value = default;
         }
 
-        public static   Results<TVaule> OK(TVaule DaTa ) => new Results<TVaule>(DaTa);
-        public static  Results<TVaule> Fail(Errors error) => new Results<TVaule>( new Errors[] { error });
+        public static   Results<TValue> OK(TValue DaTa ) => new Results<TValue>(DaTa);
+        public static  Results<TValue> Fail(Errors error) => new Results<TValue>( new Errors[] { error });
 
-        public static  Results<TVaule> Fail(IReadOnlyList<Errors> error) => new Results<TVaule>( error);
+        public static  Results<TValue> Fail(IReadOnlyList<Errors> error) => new Results<TValue>( error);
 
     }
 

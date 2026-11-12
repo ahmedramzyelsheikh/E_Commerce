@@ -1,3 +1,4 @@
+using E_Commerce.Application.Services.Contracts;
 using AutoMapper;
 using E_Commerce.Application.DTOs.OrderModule;
 using E_Commerce.Domain.Contracts;

@@ -1,6 +1,7 @@
 ﻿using E_Commerce.Domain.Common;
 using E_Commerce.Domain.Contracts;
-using E_Commerce.Domain.Data.Products;
+using E_Commerce.Domain.Models.Products;
+using E_Commerce.Domain.Models.OrderModule;
 using E_Commerce.Infrastructure.Data.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -15,7 +16,7 @@ namespace E_Commerce.Infrastructure.DataSeeding
 {
     public class DataSeeder(StoreDbContext dbContext, ILogger<DataSeeder> logger) : IDataSeeder
     {
-        public async Task DataSeedingAync(CancellationToken ct = default)
+        public async Task DataSeedingAsync(CancellationToken ct = default)
         {
             //  Implement the data seeding logic here
             // 1-  Check  there are any pending migrations
@@ -36,12 +37,11 @@ namespace E_Commerce.Infrastructure.DataSeeding
             var rootPath = AppContext.BaseDirectory;
             var path = Path.Combine(rootPath, "DataSeed");
 
-           await SeedIfEmpty<ProductBrand, int>(path, "brands.json" ,ct);
-            await SeedIfEmpty<Product, int>(path, "products.json", ct);
+            // Order matters: products reference brands and types.
+            await SeedIfEmpty<ProductBrand, int>(path, "brands.json", ct);
             await SeedIfEmpty<ProductType, int>(path, "types.json", ct);
-            var rowsseeding = await dbContext.SaveChangesAsync(ct);
-            logger.LogInformation($"Rows :  {rowsseeding}");
-
+            await SeedIfEmpty<Product, int>(path, "products.json", ct);
+            await SeedIfEmpty<DeliveryMethod, int>(path, "delivery.json", ct);
         }
         private async Task SeedIfEmpty<T,  TKey> (string rootpath,  string namefile,CancellationToken ct) where T : BaseEntity<TKey>
         {
@@ -70,8 +70,11 @@ namespace E_Commerce.Infrastructure.DataSeeding
 
             if(items?.Count > 0 )
             {
-                logger.LogInformation($"Data Seeding ....... {namefile}"); 
+                logger.LogInformation($"Data Seeding ....... {namefile}");
                 dbContext.Set<T>().AddRange(items);
+                // Save per file so the next file can reference these rows.
+                var rows = await dbContext.SaveChangesAsync(ct);
+                logger.LogInformation($"Seeded {rows} rows from {namefile}");
             }
         }
     }
