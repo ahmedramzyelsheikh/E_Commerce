@@ -21,14 +21,22 @@ namespace E_Commerce.API.Controllers
         [HttpPost("{basketId}")]
         public async Task<ActionResult<CustomerBasket>> CreateOrUpdatePaymentIntent(string basketId)
         {
-            var basket = await _paymentService.CreateOrUpdatePaymentIntent(basketId);
-
-            if (basket == null)
+            try
             {
-                return BadRequest("Problem with your basket");
-            }
+                var basket = await _paymentService.CreateOrUpdatePaymentIntent(basketId);
 
-            return Ok(basket);
+                if (basket == null)
+                {
+                    return BadRequest("Problem with your basket");
+                }
+
+                return Ok(basket);
+            }
+            catch (Stripe.StripeException ex)
+            {
+                // e.g. a missing or invalid StripeSettings:SecretKey
+                return BadRequest($"Payment provider error: {ex.Message}");
+            }
         }
     }
 }

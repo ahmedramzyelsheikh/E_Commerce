@@ -34,7 +34,7 @@
 
 **E-Commerce API** is the backend for an online store. It exposes REST endpoints for the product catalog, shopping basket, customer accounts, orders and payments, so any frontend (Angular, React, mobile) can use it.
 
-The project was built step by step, one module per session. **Each module lives on its own branch**, and the [`session-08`](../../tree/session-08) branch has the complete project. See [Learning Journey](#-learning-journey).
+The project was built step by step, one module per session. All session branches are merged into **`main`**, which holds the complete project. The branches are kept so you can see each stage. See [Learning Journey](#-learning-journey).
 
 ---
 
@@ -55,7 +55,7 @@ The project was built step by step, one module per session. **Each module lives 
 - ✅ **Specification pattern** for reusable queries
 - ✅ **Result pattern** for consistent responses and errors
 - ✅ **AutoMapper** with a custom resolver for full picture URLs
-- ✅ **Data seeding** from JSON files (brands, types, products)
+- ✅ **Automatic migrations and data seeding** on startup (brands, types, products, delivery methods, roles and admin user)
 - ✅ Separate **Identity database**
 - ✅ **Swagger** documentation
 
@@ -183,10 +183,35 @@ All routes start with `/api`. 🔒 means a JWT token is required.
 ```
 E_Commerce/
 ├── E_Commerce.slnx
-├── E_Commerce.API/              # 🌐 Controllers, Program.cs, extensions
-├── E_Commerce.Application/      # ⚙️ Services, DTOs, AutoMapper profiles, specifications
-├── E_Commerce.Domain/           # 🧩 Entities and contracts (no dependencies)
-└── E_Commerce.Infrastructure/   # 🗄️ EF Core, repositories, Redis, Identity, Stripe, seeding
+│
+├── E_Commerce.API/                     # 🌐 Presentation
+│   ├── Controllers/                    # Product, Baskets, Authentication, Orders, Payment
+│   ├── Extensions/                     # Identity/JWT setup, startup migrations + seeding
+│   ├── Files/Images/Products/          # Product images (served at /Files)
+│   └── Program.cs
+│
+├── E_Commerce.Application/             # ⚙️ Use cases
+│   ├── Common/                         # Results, Errors, QueryParams
+│   ├── DTOs/                           # Basket, Identity, OrderModule, Products
+│   ├── Profiles/                       # AutoMapper profiles + PictureUrlResolver
+│   ├── Services/
+│   │   ├── Contracts/                  # IProductService, IBasketService, IOrderService, IPaymentService, ...
+│   │   └── Implementation/             # ProductService, BasketService
+│   └── Specification/                  # Product and order specifications
+│
+├── E_Commerce.Domain/                  # 🧩 Entities and contracts (no dependencies)
+│   ├── Contracts/                      # IGenericRepository, IUnitOfWork, IBasketRepository, ISpecification, IDataSeeder
+│   └── Models/                         # Products, Basket, Identity, OrderModule
+│
+└── E_Commerce.Infrastructure/          # 🗄️ Data access and external services
+    ├── Data/
+    │   ├── Configurations/             # Fluent API configurations
+    │   ├── Context/                    # StoreDbContext, StoreIdentityDbContext
+    │   └── Migrations/                 # Store migrations (+ Identity/ for the identity database)
+    ├── DataSeeding/                    # DataSeeder, IdentityDataSeeder, SeedData/*.json
+    ├── Repositories/                   # GenericRepository, UnitOfWork, BasketRepository (Redis)
+    ├── Services/                       # Authentication, Token, Order, Payment (Stripe)
+    └── Specifications/                 # SpecificationEvaluator
 ```
 
 ---
@@ -197,46 +222,73 @@ E_Commerce/
 
 - [.NET 8 SDK](https://dotnet.microsoft.com/download/dotnet/8.0)
 - SQL Server
-- Redis (from session 04 onward), e.g. `docker run -d -p 6379:6379 redis`
-- A [Stripe](https://stripe.com) test account (session 08)
+- Redis, e.g. `docker run -d -p 6379:6379 redis`
+- A [Stripe](https://stripe.com) test account (for payments)
 
 ### Run
 
-1. **Clone the repository and switch to the complete version**
+1. **Clone the repository**
    ```bash
    git clone https://github.com/ahmedramzyelsheikh/E_Commerce.git
    cd E_Commerce
-   git checkout session-08
    ```
 
-2. **Configure `E_Commerce.API/appsettings.json`**: `DefaultConnection`, `IdentityConnection`, `Redis`, the JWT `Token` section and `StripeSettings`.
+2. **Configure `E_Commerce.API/appsettings.json`**
 
-3. **Apply the migrations**
-   ```bash
-   dotnet ef database update --project E_Commerce.Infrastructure --startup-project E_Commerce.API
-   ```
+   | Setting | What to put |
+   |---|---|
+   | `ConnectionStrings:DefaultConnection` | Store database |
+   | `ConnectionStrings:IdentityConnection` | Identity database |
+   | `ConnectionStrings:Redis` | e.g. `localhost:6379` |
+   | `Token:Key` | A secret of **at least 64 characters** (required by HMAC-SHA512) |
+   | `StripeSettings:SecretKey` / `PublishableKey` | Your Stripe **test** keys |
 
-4. **Run the API**
+3. **Run the API**
    ```bash
    dotnet run --project E_Commerce.API
    ```
 
-5. Open **Swagger** at `https://localhost:<port>/swagger`.
+   On startup the API automatically:
+   - applies the migrations for **both** databases
+   - seeds brands, types, products and delivery methods from `Infrastructure/DataSeeding/SeedData`
+   - creates the `Admin` and `SuperAdmin` roles and a default admin user (see `IdentityDataSeeder`)
+
+4. Open **Swagger** at `http://localhost:5129/swagger`.
+
+### Typical flow
+
+1. `POST /api/Authentication/Register` or `Login` → copy the token
+2. `POST /api/Baskets` with product ids and quantities
+3. `POST /api/Payment/{basketId}` → creates the Stripe payment intent
+4. `POST /api/Orders` with the basket id, delivery method and address
+
+### Adding migrations
+
+```bash
+# store database
+dotnet ef migrations add <Name> --context StoreDbContext \
+  --project E_Commerce.Infrastructure --startup-project E_Commerce.API -o Data/Migrations
+
+# identity database
+dotnet ef migrations add <Name> --context StoreIdentityDbContext \
+  --project E_Commerce.Infrastructure --startup-project E_Commerce.API -o Data/Migrations/Identity
+```
 
 ---
 
 ## 🧭 Learning Journey
 
-Each branch adds one module on top of the previous one:
+Each branch adds one module on top of the previous one. All of them are merged into `main`:
 
 | Branch | Milestone |
 |---|---|
-| `main` | 🏗️ Clean Architecture setup + Products module (repository, unit of work, seeding, Result pattern) |
+| *sessions 1–2* | 🏗️ Clean Architecture setup + Products module (repository, unit of work, seeding, Result pattern) |
 | `session-03API` | 🔎 Specification pattern + picture URL resolver |
 | `session-04` | 🧺 Basket module with **Redis** + sorting and pagination specifications |
 | `session-05` | 🔐 **Identity**: register, login, JWT, address |
 | `session-07` | 📦 **Orders** module with delivery methods |
-| `session-08` | 💳 **Stripe payments** (complete project) |
+| `session-08` | 💳 **Stripe payments** |
+| **`main`** | ✅ **Complete project**: all sessions merged, plus seed data, startup seeding and cleanup fixes |
 
 ---
 

@@ -28,19 +28,24 @@ namespace E_Commerce.Infrastructure.Services
             foreach (var item in basket.Items)
             {
                 var productItem = await _unitOfWork.GetRepository<Product, int>().GetById(item.Id, CancellationToken.None);
+                if (productItem is null) return null; // basket has a product that no longer exists
+
+                // Price always comes from the database, never from the basket
                 var itemOrdered = new ProductItemOrdered(productItem.Id, productItem.Name, productItem.PictureUrl);
                 var orderItem = new OrderItem(itemOrdered, productItem.Price, item.Quantity);
                 items.Add(orderItem);
             }
+            if (items.Count == 0) return null;
 
             // 3. Get delivery method from repo
             var deliveryMethod = await _unitOfWork.GetRepository<DeliveryMethod, int>().GetById(deliveryMethodId, CancellationToken.None);
+            if (deliveryMethod is null) return null;
 
             // 4. Calc subtotal
             var subtotal = items.Sum(item => item.Price * item.Quantity);
 
-            // 5. Create order
-            var order = new Order(buyerEmail, shippingAddress, deliveryMethod, items, subtotal, basket.PaymentIntentId);
+            // 5. Create order (the payment intent is only set after POST /api/Payment/{basketId})
+            var order = new Order(buyerEmail, shippingAddress, deliveryMethod, items, subtotal, basket.PaymentIntentId ?? string.Empty);
 
             _unitOfWork.GetRepository<Order, int>().Add(order);
 
